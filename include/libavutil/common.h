@@ -76,6 +76,17 @@
  */
 #define FFNABS(a) ((a) <= 0 ? (a) : (-(a)))
 
+/**
+ * Comparator.
+ * For two numerical expressions x and y, gives 1 if x > y, -1 if x < y, and 0
+ * if x == y. This is useful for instance in a qsort comparator callback.
+ * Furthermore, compilers are able to optimize this to branchless code, and
+ * there is no risk of overflow with signed types.
+ * As with many macros, this evaluates its argument multiple times, it thus
+ * must not have a side-effect.
+ */
+#define FFDIFFSIGN(x,y) (((x)>(y)) - ((x)<(y)))
+
 #define FFMAX(a,b) ((a) > (b) ? (a) : (b))
 #define FFMAX3(a,b,c) FFMAX(FFMAX(a,b),c)
 #define FFMIN(a,b) ((a) > (b) ? (b) : (a))
@@ -86,13 +97,6 @@
 #define FFALIGN(x, a) (((x)+(a)-1)&~((a)-1))
 
 /* misc math functions */
-
-/**
- * Reverse the order of the bits of an 8-bits unsigned integer.
- */
-#if FF_API_AV_REVERSE
-extern attribute_deprecated const uint8_t av_reverse[256];
-#endif
 
 #ifdef HAVE_AV_CONFIG_H
 #   include "config.h"

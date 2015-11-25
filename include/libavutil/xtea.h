@@ -23,7 +23,6 @@
 #define AVUTIL_XTEA_H
 
 #include <stdint.h>
-#include "version.h"
 
 /**
  * @file
